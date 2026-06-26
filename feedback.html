@@ -1,0 +1,27 @@
+{% extends 'placement/base.html' %}
+{% block title %}Companies{% endblock %}
+
+{% block content %}
+<span class="eyebrow">Registry</span>
+<h1>Companies</h1>
+
+{% if companies %}
+<div class="card card-flush">
+  <table class="ledger">
+    <thead><tr><th>Company</th><th>Username</th><th>Contact</th><th>Jobs posted</th></tr></thead>
+    <tbody>
+    {% for c in companies %}
+      <tr>
+        <td>{{ c.company_name|default:c.username }}</td>
+        <td class="text-mono">{{ c.username }}</td>
+        <td>{{ c.email }} · {{ c.contact_number }}</td>
+        <td class="text-mono">{{ c.num_jobs }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+  <p class="muted">No companies registered yet.</p>
+{% endif %}
+{% endblock %}

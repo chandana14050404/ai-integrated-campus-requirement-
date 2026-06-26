@@ -1,0 +1,29 @@
+{% extends 'placement/base.html' %}
+{% block title %}Log in{% endblock %}
+
+{% block content %}
+<div class="container-narrow" style="margin:0 auto;">
+  <span class="eyebrow">Welcome back</span>
+  <h1>Log in</h1>
+  <p class="muted">One login screen for Students, Companies and the TPO — you'll land on the right desk automatically.</p>
+
+  <form method="post" class="card" novalidate>
+    {% csrf_token %}
+    <div class="field">
+      <label for="{{ form.username.id_for_label }}">Username</label>
+      {{ form.username }}
+      {{ form.username.errors }}
+    </div>
+    <div class="field">
+      <label for="{{ form.password.id_for_label }}">Password</label>
+      {{ form.password }}
+      {{ form.password.errors }}
+    </div>
+    {{ form.non_field_errors }}
+    <button type="submit" class="btn btn-accent btn-block">Log in</button>
+    <p class="muted" style="text-align:center; margin-top:1rem;">
+      No account yet? <a href="{% url 'register' %}">Sign up</a>
+    </p>
+  </form>
+</div>
+{% endblock %}

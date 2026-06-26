@@ -1,0 +1,33 @@
+{% extends 'placement/base.html' %}
+{% block title %}Students{% endblock %}
+
+{% block content %}
+<span class="eyebrow">Registry</span>
+<h1>Students</h1>
+
+{% if students %}
+<div class="card card-flush">
+  <table class="ledger">
+    <thead><tr><th>Name</th><th>Username</th><th>Qualification</th><th>Skills</th><th>Last score</th><th>Resume</th></tr></thead>
+    <tbody>
+    {% for s in students %}
+      <tr>
+        <td>{{ s.get_full_name|default:"—" }}</td>
+        <td class="text-mono">{{ s.username }}</td>
+        <td>{{ s.student_profile.qualification|default:"—" }}</td>
+        <td>{{ s.student_profile.skill_names|default:"—" }}</td>
+        <td class="text-mono">{% if s.student_profile %}{{ s.student_profile.latest_score|floatformat:0 }}%{% else %}—{% endif %}</td>
+        <td>
+          {% if s.student_profile.resume %}
+            <a href="{{ s.student_profile.resume.url }}" target="_blank">View</a>
+          {% else %}—{% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+  <p class="muted">No students registered yet.</p>
+{% endif %}
+{% endblock %}

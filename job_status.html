@@ -1,0 +1,53 @@
+{% extends 'placement/base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block prebody %}
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow" style="color:#9CA8C2;">Training &amp; Placement Cell</span>
+    <h1>One ledger for every offer, applicant and approval on campus.</h1>
+    <p class="lede">
+      Companies post roles and set the test. Students get personalised
+      recommendations from a skill-matching engine and sit the assessment
+      online. The TPO keeps an eye on the whole drive from one screen.
+    </p>
+    <div class="hero-actions">
+      <a href="{% url 'register' %}" class="btn btn-accent">Create an account</a>
+      <a href="{% url 'login' %}" class="btn btn-outline" style="border-color:var(--paper); color:var(--paper) !important;">Log in</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="num">{{ stats.open_jobs }}</span><div class="label">Open roles</div></div>
+      <div><span class="num">{{ stats.companies }}</span><div class="label">Companies</div></div>
+      <div><span class="num">{{ stats.students }}</span><div class="label">Students registered</div></div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<div class="role-cards" style="padding-left:0; padding-right:0;">
+  <span class="eyebrow">Three desks, one drive</span>
+  <h2>Built around how a placement drive actually runs</h2>
+  <div class="grid grid-3" style="margin-top:1.4rem;">
+    <div class="role-card">
+      <span class="eyebrow">For companies</span>
+      <h3>Post roles, set the test</h3>
+      <p class="muted">List a role with required skills and salary, attach
+      a custom MCQ test, and review every applicant's score in one table.</p>
+    </div>
+    <div class="role-card">
+      <span class="eyebrow">For students</span>
+      <h3>Apply where you fit</h3>
+      <p class="muted">Build your profile once. A K-Nearest-Neighbours
+      model matches your skills against open roles and ranks the best fit
+      first.</p>
+    </div>
+    <div class="role-card">
+      <span class="eyebrow">For the TPO</span>
+      <h3>See the whole drive</h3>
+      <p class="muted">Track selections, rejections and every challenge a
+      student raises — and respond directly from the dashboard.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

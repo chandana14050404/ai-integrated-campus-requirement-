@@ -1,0 +1,34 @@
+{% extends 'placement/base.html' %}
+{% block title %}TPO dashboard{% endblock %}
+
+{% block content %}
+<span class="eyebrow">Training &amp; Placement Office</span>
+<h1>Drive overview</h1>
+
+<div class="grid grid-3">
+  <div class="stat-tile"><span class="num">{{ stats.students }}</span><div class="label">Students registered</div></div>
+  <div class="stat-tile"><span class="num">{{ stats.companies }}</span><div class="label">Companies registered</div></div>
+  <div class="stat-tile"><span class="num">{{ stats.open_jobs }}</span><div class="label">Open roles</div></div>
+  <div class="stat-tile"><span class="num">{{ stats.selected }}</span><div class="label">Selections so far</div></div>
+  <div class="stat-tile"><span class="num">{{ stats.rejected }}</span><div class="label">Rejections so far</div></div>
+  <div class="stat-tile"><span class="num">{{ stats.pending_feedback }}</span><div class="label">Feedback awaiting reply</div></div>
+</div>
+
+<div class="grid grid-3" style="margin-top:1.4rem;">
+  <a href="{% url 'tpo_students' %}" class="card role-card" style="text-decoration:none;">
+    <span class="eyebrow">Registry</span>
+    <h3>Students</h3>
+    <p class="muted">Browse academic profiles and resumes.</p>
+  </a>
+  <a href="{% url 'tpo_companies' %}" class="card role-card" style="text-decoration:none;">
+    <span class="eyebrow">Registry</span>
+    <h3>Companies</h3>
+    <p class="muted">See who's hiring and how many roles they've posted.</p>
+  </a>
+  <a href="{% url 'tpo_feedback_list' %}" class="card role-card" style="text-decoration:none;">
+    <span class="eyebrow">Support queue</span>
+    <h3>Student feedback</h3>
+    <p class="muted">Review and respond to challenges students raise.</p>
+  </a>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'placement/base.html' %}
+{% block title %}Respond to feedback{% endblock %}
+
+{% block content %}
+<span class="eyebrow">{{ feedback.student.get_full_name|default:feedback.student.username }}{% if feedback.job %} · {{ feedback.job.title }}{% endif %}</span>
+<h1>Respond to feedback</h1>
+
+<div class="card">
+  <p class="muted text-mono">{{ feedback.created_at|date:"d M Y, H:i" }}</p>
+  <p>{{ feedback.message }}</p>
+</div>
+
+<form method="post" class="card">
+  {% csrf_token %}
+  <div class="field">
+    <label for="{{ form.tpo_response.id_for_label }}">Your response</label>
+    {{ form.tpo_response }}
+    {{ form.tpo_response.errors }}
+  </div>
+  <div class="field" style="display:flex; align-items:center; gap:0.5em;">
+    {{ form.resolved }}
+    <label for="{{ form.resolved.id_for_label }}" style="margin:0;">Mark as resolved</label>
+  </div>
+  <button type="submit" class="btn btn-accent">Save response</button>
+  <a href="{% url 'tpo_feedback_list' %}" class="btn btn-outline">Back</a>
+</form>
+{% endblock %}

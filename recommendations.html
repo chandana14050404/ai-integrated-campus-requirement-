@@ -1,0 +1,37 @@
+{% extends 'placement/base.html' %}
+{% block title %}Student feedback{% endblock %}
+
+{% block content %}
+<span class="eyebrow">Support queue</span>
+<h1>Student feedback &amp; challenges</h1>
+
+{% if feedback_qs %}
+  {% for f in feedback_qs %}
+    <div class="card">
+      <div class="card-header-row">
+        <div>
+          <strong>{{ f.student.get_full_name|default:f.student.username }}</strong>
+          <span class="muted text-mono"> · {{ f.created_at|date:"d M Y, H:i" }}{% if f.job %} · {{ f.job.title }}{% endif %}</span>
+        </div>
+        {% if f.resolved %}
+          <span class="stamp stamp-selected">Resolved</span>
+        {% else %}
+          <span class="stamp stamp-pending">Pending</span>
+        {% endif %}
+      </div>
+      <p>{{ f.message }}</p>
+      {% if f.tpo_response %}
+        <p class="muted"><strong>Your response:</strong> {{ f.tpo_response }}</p>
+      {% endif %}
+      <a href="{% url 'tpo_feedback_respond' f.id %}" class="btn btn-sm btn-outline">
+        {% if f.tpo_response %}Update response{% else %}Respond{% endif %}
+      </a>
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="empty-state card">
+    <h3>No feedback yet</h3>
+    <p>When a student raises a challenge about an exam or interview, it will show up here.</p>
+  </div>
+{% endif %}
+{% endblock %}
